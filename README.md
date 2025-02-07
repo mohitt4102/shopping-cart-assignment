@@ -74,3 +74,57 @@ The below is a sample with the correct values you can use to confirm your calcul
 * ❌ Submit any form of app, such as web APIs, browser, desktop, or command-line applications.
 * ❌ Add unnecessary layers of abstraction.
 * ❌ Add unnecessary patterns/ architectural features that aren’t called for e.g. persistent storage.
+
+## Implementation Details
+
+### Assumptions
+- The shopping cart operates entirely in memory and does not persist data.
+- The API always returns valid product prices for the given names.
+- The tax rate is fixed at 12.5% and does not change.
+- All prices retrieved from the API are in USD.
+- The API server (`npm run serve-products`) must be running before adding products.
+
+### Tradeoffs
+- The solution does not use a database for storage, prioritizing simplicity.
+- Products are identified solely by name, assuming no duplicate names exist.
+- The implementation favors readability and maintainability over extreme optimization.
+
+## Testing Instructions
+
+### 1. Prerequisites
+Ensure you have the following installed:  
+- Node.js (`v18+` recommended)  
+- npm (comes with Node.js)  
+
+Clone the repository and install dependencies:  
+```sh
+git clone <your-public-repo-url>
+cd shopping-cart-assignment
+npm install
+
+### **Testing Instructions**
+
+1. **Start the Price API**  
+   Run the following command to start the Price API service:  
+   ```sh
+   npm run serve-products
+   ```
+
+2. **Start the Shopping Cart Module**  
+   Once the API is running, start the shopping cart module:  
+   ```sh
+   node index.js
+   ```
+   - If needed, modify the values in `index.js`.  
+   - Log the cart totals and verify that:  
+     - **Subtotal** is calculated correctly.  
+     - **Tax (12.5%)** is applied properly.  
+     - **Total payable** matches expected values.  
+
+3. **Run Tests**  
+   Execute the following command to run the tests:  
+   ```sh
+   npm test
+   ```
+   This will validate the shopping cart's functionality.
+
